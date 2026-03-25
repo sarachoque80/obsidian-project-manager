@@ -1,0 +1,270 @@
+<mxGraphModel>
+  <root>
+    <mxCell id="0"/>
+    <mxCell id="1" parent="0"/>
+
+    <!-- Pool with auto-stacking lanes -->
+    <mxCell id="pool-1" value="Obsidian Direct Response Project Manager - Architecture" style="swimlane;childLayout=stackLayout;resizeParent=1;resizeParentMax=0;horizontal=0;startSize=20;horizontalStack=0;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="40" y="40" width="1640" height="580" as="geometry"/>
+    </mxCell>
+
+    <!-- Lane 1: Core/Infrastructure -->
+    <mxCell id="lane-1" value="Core / Infrastructure" style="swimlane;startSize=20;horizontal=0;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="pool-1">
+      <mxGeometry x="20" width="780" height="100" as="geometry"/>
+    </mxCell>
+
+    <!-- Lane 2: State Management -->
+    <mxCell id="lane-2" value="State Management (Zustand)" style="swimlane;startSize=20;horizontal=0;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="pool-1">
+      <mxGeometry x="20" y="100" width="780" height="100" as="geometry"/>
+    </mxCell>
+
+    <!-- Lane 3: UI Components -->
+    <mxCell id="lane-3" value="UI Components" style="swimlane;startSize=20;horizontal=0;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="pool-1">
+      <mxGeometry x="20" y="200" width="780" height="140" as="geometry"/>
+    </mxCell>
+
+    <!-- Lane 4: Utilities & Constants -->
+    <mxCell id="lane-4" value="Utilities & Constants" style="swimlane;startSize=20;horizontal=0;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="pool-1">
+      <mxGeometry x="20" y="340" width="780" height="100" as="geometry"/>
+    </mxCell>
+
+    <!-- Lane 5: Data Layer -->
+    <mxCell id="lane-5" value="Data Layer" style="swimlane;startSize=20;horizontal=0;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="pool-1">
+      <mxGeometry x="20" y="440" width="780" height="100" as="geometry"/>
+    </mxCell>
+
+    <!-- Phase 1: Obsidian API Loading -->
+    <mxCell id="step-1" value="Obsidian API" style="rounded=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;html=1;" vertex="1" parent="pool-1">
+      <mxGeometry x="60" y="80" width="140" height="50" as="geometry"/>
+    </mxCell>
+
+    <!-- Phase 2: Plugin Initialization -->
+    <mxCell id="step-2" value="DirectResponseProjectManagerPlugin" style="rounded=1;whiteSpace=wrap;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;html=1;" vertex="1" parent="pool-1">
+      <mxGeometry x="260" y="70" width="180" height="70" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="step-3" value="DataManager" style="rounded=1;whiteSpace=wrap;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;html=1;" vertex="1" parent="pool-1">
+      <mxGeometry x="500" y="70" width="160" height="70" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="step-4" value="EventBus" style="rounded=1;whiteSpace=wrap;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;html=1;" vertex="1" parent="pool-1">
+      <mxGeometry x="720" y="70" width="140" height="70" as="geometry"/>
+    </mxCell>
+
+    <!-- Phase 3: Store Initialization -->
+    <mxCell id="step-5" value="ProjectsStore" style="rounded=1;whiteSpace=wrap;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;html=1;" vertex="1" parent="pool-1">
+      <mxGeometry x="60" y="140" width="140" height="50" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="step-6" value="ContextStore" style="rounded=1;whiteSpace=wrap;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;html=1;" vertex="1" parent="pool-1">
+      <mxGeometry x="240" y="140" width="140" height="50" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="step-7" value="FilesStore" style="rounded=1;whiteSpace=wrap;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;html=1;" vertex="1" parent="pool-1">
+      <mxGeometry x="420" y="140" width="140" height="50" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="step-8" value="StagesStore" style="rounded=1;whiteSpace=wrap;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;html=1;" vertex="1" parent="pool-1">
+      <mxGeometry x="600" y="140" width="140" height="50" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="step-9" value="RoutineStore" style="rounded=1;whiteSpace=wrap;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;html=1;" vertex="1" parent="pool-1">
+      <mxGeometry x="780" y="140" width="140" height="50" as="geometry"/>
+    </mxCell>
+
+    <!-- Phase 4: UI Components -->
+    <mxCell id="step-10" value="ProjectDashboard" style="rounded=1;whiteSpace=wrap;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;html=1;" vertex="1" parent="pool-1">
+      <mxGeometry x="60" y="245" width="140" height="50" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="step-11" value="ContextDocument" style="rounded=1;whiteSpace=wrap;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;html=1;" vertex="1" parent="pool-1">
+      <mxGeometry x="240" y="245" width="140" height="50" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="step-12" value="FilesSection" style="rounded=1;whiteSpace=wrap;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;html=1;" vertex="1" parent="pool-1">
+      <mxGeometry x="420" y="245" width="140" height="50" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="step-13" value="StagesSection" style="rounded=1;whiteSpace=wrap;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;html=1;" vertex="1" parent="pool-1">
+      <mxGeometry x="600" y="245" width="140" height="50" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="step-14" value="CalendarView" style="rounded=1;whiteSpace=wrap;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;html=1;" vertex="1" parent="pool-1">
+      <mxGeometry x="60" y="285" width="140" height="50" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="step-15" value="RoutineDashboard" style="rounded=1;whiteSpace=wrap;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;html=1;" vertex="1" parent="pool-1">
+      <mxGeometry x="240" y="285" width="140" height="50" as="geometry"/>
+    </mxCell>
+
+    <!-- Phase 5: Utilities -->
+    <mxCell id="step-16" value="DateUtils" style="rounded=1;whiteSpace=wrap;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;html=1;" vertex="1" parent="pool-1">
+      <mxGeometry x="60" y="380" width="140" height="50" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="step-17" value="ProgressCalculator" style="rounded=1;whiteSpace=wrap;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;html=1;" vertex="1" parent="pool-1">
+      <mxGeometry x="240" y="380" width="140" height="50" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="step-18" value="FileHandler" style="rounded=1;whiteSpace=wrap;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;html=1;" vertex="1" parent="pool-1">
+      <mxGeometry x="420" y="380" width="140" height="50" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="step-19" value="Validators" style="rounded=1;whiteSpace=wrap;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;html=1;" vertex="1" parent="pool-1">
+      <mxGeometry x="600" y="380" width="140" height="50" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="step-20" value="Constants (Stages, Pillars, TaskStatus)" style="rounded=0;whiteSpace=wrap;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;html=1;" vertex="1" parent="pool-1">
+      <mxGeometry x="60" y="430" width="680" height="40" as="geometry"/>
+    </mxCell>
+
+    <!-- Phase 6: Data Layer -->
+    <mxCell id="step-21" value="Obsidian Vault (JSON Files)" style="rounded=1;whiteSpace=wrap;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;html=1;" vertex="1" parent="pool-1">
+      <mxGeometry x="60" y="480" width="220" height="50" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="step-22" value="Projects (/projects/*.json)" style="rounded=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;html=1;" vertex="1" parent="pool-1">
+      <mxGeometry x="320" y="480" width="180" height="50" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="step-23" value="Context (/contexts/*.json)" style="rounded=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;html=1;" vertex="1" parent="pool-1">
+      <mxGeometry x="520" y="480" width="180" height="50" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="step-24" value="Files (/files/*.json + /assets/)" style="rounded=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;html=1;" vertex="1" parent="pool-1">
+      <mxGeometry x="720" y="480" width="220" height="50" as="geometry"/>
+    </mxCell>
+
+    <!-- Labeled connector: Obsidian API -> Plugin -->
+    <mxCell id="edge1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#666666;strokeWidth=2;entryX=0;entryY=0.5;exitX=1;exitY=0.5;" edge="1" source="step-1" target="step-2" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <!-- Plugin -> DataManager -->
+    <mxCell id="edge2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#666666;strokeWidth=2;entryX=0;entryY=0.5;exitX=1;exitY=0.5;" edge="1" source="step-2" target="step-3" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <!-- Plugin -> EventBus -->
+    <mxCell id="edge3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#666666;strokeWidth=2;entryX=0;entryY=0.5;exitX=1;exitY=0.5;" edge="1" source="step-2" target="step-4" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <!-- Plugin -> Stores (Init) -->
+    <mxCell id="edge4" value="Initialize" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#666666;strokeWidth=2;entryX=0.5;entryY=1;exitX=0.5;exitY=1;" edge="1" source="step-2" target="step-5" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="edge5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#666666;strokeWidth=2;entryX=0.5;entryY=1;exitX=0.5;exitY=1;" edge="1" source="step-2" target="step-6" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="edge6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#666666;strokeWidth=2;entryX=0.5;entryY=1;exitX=0.5;exitY=1;" edge="1" source="step-2" target="step-7" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="edge7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#666666;strokeWidth=2;entryX=0.5;entryY=1;exitX=0.5;exitY=1;" edge="1" source="step-2" target="step-8" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="edge8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#666666;strokeWidth=2;entryX=0.5;entryY=1;exitX=0.5;exitY=1;" edge="1" source="step-2" target="step-9" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <!-- UI Components -> Stores (Read Data) -->
+    <mxCell id="edge9" value="Read" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#666666;strokeWidth=2;dashed=1;entryX=0.5;entryY=1;exitX=0.5;exitY=0;" edge="1" source="step-5" target="step-10" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="edge10" value="Read" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#666666;strokeWidth=2;dashed=1;entryX=0.5;entryY=1;exitX=0.5;exitY=0;" edge="1" source="step-6" target="step-11" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="edge11" value="Read" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#666666;strokeWidth=2;dashed=1;entryX=0.5;entryY=1;exitX=0.5;exitY=0;" edge="1" source="step-7" target="step-12" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="edge12" value="Read" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#666666;strokeWidth=2;dashed=1;entryX=0.5;entryY=1;exitX=0.5;exitY=0;" edge="1" source="step-8" target="step-13" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="edge13" value="Read" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#666666;strokeWidth=2;dashed=1;entryX=0.5;entryY=1;exitX=0.5;exitY=0;" edge="1" source="step-9" target="step-15" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <!-- UI Components -> Utilities -->
+    <mxCell id="edge14" value="Use" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#666666;strokeWidth=2;entryX=0.5;entryY=1;exitX=0.5;exitY=0;" edge="1" source="step-16" target="step-10" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="edge15" value="Use" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#666666;strokeWidth=2;entryX=0.5;entryY=1;exitX=0.5;exitY=0;" edge="1" source="step-17" target="step-10" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="edge16" value="Use" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#666666;strokeWidth=2;entryX=0.5;entryY=1;exitX=0.5;exitY=0;" edge="1" source="step-17" target="step-13" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="edge17" value="Use" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#666666;strokeWidth=2;entryX=0.5;entryY=1;exitX=0.5;exitY=0;" edge="1" source="step-18" target="step-12" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="edge18" value="Use" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#666666;strokeWidth=2;entryX=0.5;entryY=1;exitX=0.5;exitY=0;" edge="1" source="step-19" target="step-11" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <!-- Stores -> DataManager (Save) -->
+    <mxCell id="edge19" value="Save" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#666666;strokeWidth=2;dashed=1;entryX=0.5;entryY=0;exitX=0.5;exitY=1;" edge="1" source="step-5" target="step-3" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="edge20" value="Save" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#666666;strokeWidth=2;dashed=1;entryX=0.5;entryY=0;exitX=0.5;exitY=1;" edge="1" source="step-6" target="step-3" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="edge21" value="Save" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#666666;strokeWidth=2;dashed=1;entryX=0.5;entryY=0;exitX=0.5;exitY=1;" edge="1" source="step-7" target="step-3" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="edge22" value="Save" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#666666;strokeWidth=2;dashed=1;entryX=0.5;entryY=0;exitX=0.5;exitY=1;" edge="1" source="step-9" target="step-3" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <!-- DataManager -> Vault -->
+    <mxCell id="edge23" value="Persist" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#666666;strokeWidth=2;entryX=0;entryY=0.5;exitX=1;exitY=0.5;" edge="1" source="step-3" target="step-21" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <!-- Vault -> Data Files -->
+    <mxCell id="edge24" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#666666;strokeWidth=2;entryX=0;entryY=0.5;exitX=1;exitY=0.5;" edge="1" source="step-21" target="step-22" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="edge25" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#666666;strokeWidth=2;entryX=0;entryY=0.5;exitX=1;exitY=0.5;" edge="1" source="step-21" target="step-23" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="edge26" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#666666;strokeWidth=2;entryX=0;entryY=0.5;exitX=1;exitY=0.5;" edge="1" source="step-21" target="step-24" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <!-- EventBus -> All Components -->
+    <mxCell id="edge27" value="Events" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#666666;strokeWidth=2;dashed=1;entryX=1;entryY=0.75;exitX=0;exitY=0.5;" edge="1" source="step-4" target="step-10" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="edge28" value="Events" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#666666;strokeWidth=2;dashed=1;entryX=1;entryY=0.5;exitX=0;exitY=0.5;" edge="1" source="step-4" target="step-5" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <!-- Legend Box -->
+    <mxCell id="legend" value="Legend" style="rounded=0;whiteSpace=wrap;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;html=1;" vertex="1" parent="pool-1">
+      <mxGeometry x="860" y="480" width="220" height="50" as="geometry"/>
+    </mxCell>
+
+    <mxCell id="legend-text" value="── Solid: Direct flow&#10;┄┄ Dashed: Data/Event flow" style="rounded=0;whiteSpace=wrap;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;html=1;" vertex="1" parent="pool-1">
+      <mxGeometry x="860" y="500" width="220" height="30" as="geometry"/>
+    </mxCell>
+
+  </root>
+</mxGraphModel>
