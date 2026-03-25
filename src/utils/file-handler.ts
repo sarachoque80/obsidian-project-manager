@@ -1,10 +1,10 @@
-import { Plugin } from 'obsidian';
+import { App } from 'obsidian';
 import { FileData, FileType } from '../types/file';
 
 export async function handleFileUpload(
   file: File,
   type: FileType,
-  plugin: Plugin,
+  app: App,
   fileId: string
 ): Promise<{ path?: string; url?: string }> {
   if (type === 'local') {
@@ -13,7 +13,7 @@ export async function handleFileUpload(
     const uint8Array = new Uint8Array(arrayBuffer);
 
     try {
-      await plugin.vault.createBinary(filePath, uint8Array);
+      await app.vault.createBinary(filePath, uint8Array.buffer);
       return { path: filePath };
     } catch (error) {
       console.error('Error saving file:', error);
@@ -28,12 +28,12 @@ export async function handleFileUpload(
 
 export async function handleFileDelete(
   fileData: FileData,
-  plugin: Plugin
+  app: App
 ): Promise<void> {
   if (fileData.type === 'local' && fileData.path) {
-    const file = plugin.vault.getAbstractFileByPath(fileData.path);
+    const file = app.vault.getAbstractFileByPath(fileData.path);
     if (file) {
-      await plugin.vault.delete(file);
+      await app.vault.delete(file);
     }
   }
 }

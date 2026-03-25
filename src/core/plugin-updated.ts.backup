@@ -1,4 +1,4 @@
-import { Plugin, PluginSettingTab, Setting, Notice } from 'obsidian';
+import { Plugin, App, PluginSettingTab, Setting, Notice } from 'obsidian';
 import { ProjectDashboard } from '../components/dashboard/ProjectDashboard';
 import { ProjectSearchModal } from '../components/dashboard/ProjectSearchModal';
 import { ContextDocument } from '../components/context/ContextDocument';
@@ -35,7 +35,7 @@ export class DirectResponseProjectManagerPlugin extends Plugin {
     console.log(`🚀 Loading Direct Response Project Manager Plugin v${this.manifest.version}`);
 
     await this.loadSettings();
-    this.dataManager = new DataManager(this);
+    this.dataManager = new DataManager(this.app);
 
     // Add status bar item
     this.statusBarItem = this.addStatusBarItem();
@@ -87,7 +87,7 @@ export class DirectResponseProjectManagerPlugin extends Plugin {
     this.addCommand({
       id: 'search-projects',
       name: 'Search Projects',
-      hotkeys: [{ modifiers: ['Mod', 'p'] }],
+      hotkeys: [{ modifiers: ['Mod'], key: 'p' }],
       callback: () => {
         this.openProjectSearch();
       }
@@ -216,7 +216,7 @@ class DirectResponseSettingTab extends PluginSettingTab {
   plugin: DirectResponseProjectManagerPlugin;
 
   constructor(app: App, plugin: DirectResponseProjectManagerPlugin) {
-    super(app);
+    super(app, plugin);
     this.plugin = plugin;
   }
 
@@ -232,22 +232,24 @@ class DirectResponseSettingTab extends PluginSettingTab {
     new Setting(containerEl)
       .setName('Duración por defecto (días)')
       .setDesc('Número de días para nuevos proyectos')
-      .addText(text => {
-        const days = parseInt(text) || 10;
-        this.plugin.settings.defaultProjectDuration = days;
-        this.plugin.saveSettings();
-      })
-      .setValue(this.plugin.settings.defaultProjectDuration.toString());
+      .addText(text => text
+        .setPlaceholder('10')
+        .setValue(this.plugin.settings.defaultProjectDuration.toString())
+        .onChange(async (value) => {
+          this.plugin.settings.defaultProjectDuration = parseInt(value) || 10;
+          await this.plugin.saveSettings();
+        }));
 
     // Auto-save toggle
     new Setting(containerEl)
       .setName('Auto-guardado')
       .setDesc('Guardar cambios automáticamente al vault')
-      .addToggle(toggle => {
-        this.plugin.settings.autoSave = toggle;
-        this.plugin.saveSettings();
-      })
-      .setValue(this.plugin.settings.autoSave);
+      .addToggle(toggle => toggle
+        .setValue(this.plugin.settings.autoSave)
+        .onChange(async (value) => {
+          this.plugin.settings.autoSave = value;
+          await this.plugin.saveSettings();
+        }));
 
     // Theme selection
     containerEl.createEl('h3', { text: 'Tema' });
@@ -255,15 +257,16 @@ class DirectResponseSettingTab extends PluginSettingTab {
     new Setting(containerEl)
       .setName('Tema de color')
       .setDesc('Selecciona el esquema de color')
-      .addDropdown(dropdown => {
-        const theme = dropdown.getValue() as 'purple' | 'blue';
-        this.plugin.settings.theme = theme;
-        this.plugin.saveSettings();
-        this.applyTheme(theme);
-      })
-      .addOption('Purple (Default)', 'purple')
-      .addOption('Blue', 'blue')
-      .setValue(this.plugin.settings.theme);
+      .addDropdown(dropdown => dropdown
+        .addOption('purple', 'Purple (Default)')
+        .addOption('blue', 'Blue')
+        .setValue(this.plugin.settings.theme)
+        .onChange(async (value) => {
+          const theme = value as 'purple' | 'blue';
+          this.plugin.settings.theme = theme;
+          await this.plugin.saveSettings();
+          this.applyTheme(theme);
+        }));
 
     // Info section
     const infoSection = containerEl.createDiv({ cls: 'drpm-info-section' });

@@ -1,4 +1,4 @@
-import { Plugin, PluginSettingTab, Setting, Notice } from 'obsidian';
+import { Plugin, App, PluginSettingTab, Setting, Notice } from 'obsidian';
 import { ProjectDashboard } from '../components/dashboard/ProjectDashboard';
 import { DataManager } from './data-manager';
 
@@ -20,7 +20,7 @@ export default class DirectResponseProjectManagerPlugin extends Plugin {
     console.log('Loading Direct Response Project Manager Plugin');
 
     await this.loadSettings();
-    this.dataManager = new DataManager(this);
+    this.dataManager = new DataManager(this.app);
 
     // Add ribbon icon
     this.addRibbonIcon('rocket', 'Direct Response PM', () => {

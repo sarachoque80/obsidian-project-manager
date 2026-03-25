@@ -1,12 +1,14 @@
 import { App, Modal } from 'obsidian';
-import { DirectResponseProjectManagerPlugin } from '../../core/plugin';
-import { useRoutineStore, DailyRoutine, TodoItem } from '../../stores/routine-store';
+import DirectResponseProjectManagerPlugin from '../../core/plugin';
+import { useRoutineStore } from '../../stores/routine-store';
+import type { DailyRoutine, TodoItem } from '../../types/routine';
 
 export class RoutineDashboard extends Modal {
   private plugin: DirectResponseProjectManagerPlugin;
   private container: HTMLElement;
   private currentDate: Date = new Date();
   private currentTab: 'morning' | 'study' | 'timeboxing' | 'todos' = 'morning';
+  private tabContent: HTMLElement | null = null;
 
   constructor(app: App, plugin: DirectResponseProjectManagerPlugin) {
     super(app);
@@ -108,7 +110,7 @@ export class RoutineDashboard extends Modal {
       });
 
       tab.addEventListener('click', () => {
-        this.switchTab(config.id);
+        this.switchTab(config.id as 'morning' | 'study' | 'timeboxing' | 'todos');
       });
 
       tabs.appendChild(tab);
@@ -119,7 +121,9 @@ export class RoutineDashboard extends Modal {
 
   private switchTab(tabId: 'morning' | 'study' | 'timeboxing' | 'todos') {
     this.currentTab = tabId;
-    this.renderTabContent();
+    if (this.tabContent) {
+      this.renderTabContent(this.tabContent);
+    }
   }
 
   private renderTabContent(container: HTMLElement) {
@@ -142,7 +146,7 @@ export class RoutineDashboard extends Modal {
   }
 
   private renderMorningRoutine(container: HTMLElement) {
-    const { routine } = this.getRoutineForDate();
+    const routine = this.getRoutineForDate();
 
     if (!routine) {
       container.innerHTML = '<p class="drpm-empty-state">No hay rutina para este día. Crea una nueva.</p>';
@@ -166,7 +170,7 @@ export class RoutineDashboard extends Modal {
     englishSection.createEl('h3', { text: '🇬🇧 Inglés' });
 
     const englishTasks = routine.morningRoutine.english;
-    englishTasks.forEach((task) => {
+    englishTasks.forEach((task: any) => {
       const taskItem = this.createChecklistItem(
         task.type === 'reading' ? '📖 Lectura' : '🎧 Listening',
         task.completed,
@@ -206,7 +210,7 @@ export class RoutineDashboard extends Modal {
   }
 
   private renderStudySection(container: HTMLElement) {
-    const { routine } = this.getRoutineForDate();
+    const routine = this.getRoutineForDate();
 
     if (!routine) return;
 
@@ -217,7 +221,7 @@ export class RoutineDashboard extends Modal {
     copySection.createEl('h3', { text: '✍ Copywriting' });
 
     const copyStudies = routine.studySection.copyStudy;
-    copyStudies.forEach((study) => {
+    copyStudies.forEach((study: any) => {
       const studyItem = this.createStudyItem(study, 'copy');
       copySection.appendChild(studyItem);
     });
@@ -229,7 +233,7 @@ export class RoutineDashboard extends Modal {
     vslSection.createEl('h3', { text: '🎬 VSL' });
 
     const vslStudies = routine.studySection.vslStudy;
-    vslStudies.forEach((study) => {
+    vslStudies.forEach((study: any) => {
       const studyItem = this.createStudyItem(study, 'vsl');
       vslSection.appendChild(studyItem);
     });
@@ -248,7 +252,7 @@ export class RoutineDashboard extends Modal {
     const books = routine.studySection.books;
     const booksList = booksSection.createDiv({ cls: 'drpm-books-list' });
 
-    books.forEach((book) => {
+    books.forEach((book: any) => {
       const bookItem = this.createBookItem(book);
       booksList.appendChild(bookItem);
     });
@@ -269,7 +273,7 @@ export class RoutineDashboard extends Modal {
     const podcasts = routine.studySection.podcasts;
     const podcastsList = podcastsSection.createDiv({ cls: 'drpm-podcasts-list' });
 
-    podcasts.forEach((podcast) => {
+    podcasts.forEach((podcast: any) => {
       const podcastItem = this.createPodcastItem(podcast);
       podcastsList.appendChild(podcastItem);
     });
@@ -282,7 +286,7 @@ export class RoutineDashboard extends Modal {
   }
 
   private renderTimeboxing(container: HTMLElement) {
-    const { routine } = this.getRoutineForDate();
+    const routine = this.getRoutineForDate();
 
     if (!routine) {
       container.innerHTML = '<p class="drpm-empty-state">No hay rutina para este día.</p>';
@@ -308,11 +312,11 @@ export class RoutineDashboard extends Modal {
 
     const timeBlocks = section.createDiv({ cls: 'drpm-timeblocks' });
 
-    const sortedBlocks = routine.timeBoxing.sort((a, b) => {
+    const sortedBlocks = routine.timeBoxing.sort((a: any, b: any) => {
       return a.startTime.localeCompare(b.startTime);
     });
 
-    sortedBlocks.forEach((block) => {
+    sortedBlocks.forEach((block: any) => {
       const blockItem = this.createTimeBlockItem(block);
       timeBlocks.appendChild(blockItem);
     });
@@ -322,7 +326,7 @@ export class RoutineDashboard extends Modal {
   }
 
   private renderTodos(container: HTMLElement) {
-    const { routine } = this.getRoutineForDate();
+    const routine = this.getRoutineForDate();
 
     if (!routine) {
       container.innerHTML = '<p class="drpm-empty-state">No hay tareas para este día.</p>';
@@ -347,8 +351,8 @@ export class RoutineDashboard extends Modal {
     const todayList = todaySection.createDiv({ cls: 'drpm-todos-list' });
 
     routine.todo
-      .filter(t => t.category === 'today')
-      .forEach((todo) => {
+      .filter((t: TodoItem) => t.category === 'today')
+      .forEach((todo: TodoItem) => {
         const todoItem = this.createTodoItem(todo);
         todayList.appendChild(todoItem);
       });
@@ -364,8 +368,8 @@ export class RoutineDashboard extends Modal {
     const weekList = weekSection.createDiv({ cls: 'drpm-todos-list' });
 
     routine.todo
-      .filter(t => t.category === 'this-week')
-      .forEach((todo) => {
+      .filter((t: TodoItem) => t.category === 'this-week')
+      .forEach((todo: TodoItem) => {
         const todoItem = this.createTodoItem(todo);
         weekList.appendChild(todoItem);
       });
@@ -382,12 +386,12 @@ export class RoutineDashboard extends Modal {
 
     const checkbox = item.createEl('input', {
       type: 'checkbox',
-      checked: checked,
       cls: 'drpm-checkbox'
-    });
+    }) as HTMLInputElement;
+    checkbox.checked = checked;
 
     checkbox.addEventListener('change', (e) => {
-      onChange((e.target as HTMLInputElement).checked);
+      onChange(checkbox.checked);
     });
 
     const text = item.createEl('span', { text: label });
@@ -403,12 +407,12 @@ export class RoutineDashboard extends Modal {
 
     const checkbox = item.createEl('input', {
       type: 'checkbox',
-      checked: study.completed,
       cls: 'drpm-checkbox'
-    });
+    }) as HTMLInputElement;
+    checkbox.checked = study.completed;
 
     checkbox.addEventListener('change', (e) => {
-      this.toggleStudyItem(study.id, type, (e.target as HTMLInputElement).checked);
+      this.toggleStudyItem(study.id, type, checkbox.checked);
     });
 
     const content = item.createDiv({ cls: 'drpm-study-content' });
@@ -508,12 +512,12 @@ export class RoutineDashboard extends Modal {
 
     const checkbox = item.createEl('input', {
       type: 'checkbox',
-      checked: todo.completed,
       cls: 'drpm-checkbox'
-    });
+    }) as HTMLInputElement;
+    checkbox.checked = todo.completed;
 
     checkbox.addEventListener('change', (e) => {
-      this.toggleTodoItem(todo.id, (e.target as HTMLInputElement).checked);
+      this.toggleTodoItem(todo.id, checkbox.checked);
     });
 
     const text = item.createEl('span', { text: todo.text });
@@ -534,58 +538,97 @@ export class RoutineDashboard extends Modal {
     return item;
   }
 
-  private getRoutineForDate(): any {
+  private getRoutineForDate(): DailyRoutine | undefined {
     const { getRoutineByDate } = useRoutineStore.getState();
-    return getRoutineByDate(this.currentDate) || {};
+    return getRoutineByDate(this.currentDate);
   }
 
   private togglePrayer(completed: boolean) {
-    const { routine, updateRoutine } = useRoutineStore.getState();
+    const routine = this.getRoutineForDate();
     if (!routine) return;
 
-    routine.morningRoutine.prayer = completed;
-    updateRoutine(routine.id, routine);
+    const { updateRoutine } = useRoutineStore.getState();
+    const updatedRoutine = {
+      ...routine,
+      morningRoutine: {
+        ...routine.morningRoutine,
+        prayer: completed
+      }
+    };
+    updateRoutine(routine.id, updatedRoutine);
   }
 
   private toggleEnglishTask(taskId: string, completed: boolean) {
-    const { routine, updateRoutine } = useRoutineStore.getState();
+    const routine = this.getRoutineForDate();
     if (!routine) return;
 
-    const task = routine.morningRoutine.english.find(t => t.id === taskId);
-    if (task) {
-      task.completed = completed;
-      updateRoutine(routine.id, routine);
-    }
+    const { updateRoutine } = useRoutineStore.getState();
+    const updatedRoutine = {
+      ...routine,
+      morningRoutine: {
+        ...routine.morningRoutine,
+        english: routine.morningRoutine.english.map(t =>
+          t.id === taskId ? { ...t, completed } : t
+        )
+      }
+    };
+    updateRoutine(routine.id, updatedRoutine);
   }
 
   private toggleListeningSkill(completed: boolean) {
-    const { routine, updateRoutine } = useRoutineStore.getState();
+    const routine = this.getRoutineForDate();
     if (!routine) return;
 
-    routine.morningRoutine.listeningSkill.completed = completed;
-    updateRoutine(routine.id, routine);
+    const { updateRoutine } = useRoutineStore.getState();
+    const updatedRoutine = {
+      ...routine,
+      morningRoutine: {
+        ...routine.morningRoutine,
+        listeningSkill: {
+          ...routine.morningRoutine.listeningSkill,
+          completed
+        }
+      }
+    };
+    updateRoutine(routine.id, updatedRoutine);
   }
 
   private toggleStudyItem(studyId: string, type: string, completed: boolean) {
-    const { routine, updateRoutine } = useRoutineStore.getState();
+    const routine = this.getRoutineForDate();
     if (!routine) return;
 
+    const { updateRoutine } = useRoutineStore.getState();
+    let updatedRoutine = { ...routine };
+
     if (type === 'copy') {
-      const study = routine.studySection.copyStudy.find(s => s.id === studyId);
-      if (study) {
-        study.completed = completed;
-        updateRoutine(routine.id, routine);
-      }
+      updatedRoutine = {
+        ...routine,
+        studySection: {
+          ...routine.studySection,
+          copyStudy: routine.studySection.copyStudy.map(s =>
+            s.id === studyId ? { ...s, completed } : s
+          )
+        }
+      };
     } else if (type === 'vsl') {
-      const study = routine.studySection.vslStudy.find(s => s.id === studyId);
-      if (study) {
-        study.completed = completed;
-        updateRoutine(routine.id, routine);
-      }
+      updatedRoutine = {
+        ...routine,
+        studySection: {
+          ...routine.studySection,
+          vslStudy: routine.studySection.vslStudy.map(s =>
+            s.id === studyId ? { ...s, completed } : s
+          )
+        }
+      };
     }
+
+    updateRoutine(routine.id, updatedRoutine);
   }
 
   private addTodoItem(category: 'today' | 'this-week') {
+    const routine = this.getRoutineForDate();
+    if (!routine) return;
+
     const newTodo: TodoItem = {
       id: `todo-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       text: '',
@@ -595,23 +638,23 @@ export class RoutineDashboard extends Modal {
       createdAt: new Date()
     };
 
-    const { routine, addTodoItem } = useRoutineStore.getState();
-    if (!routine) return;
-
+    const { addTodoItem } = useRoutineStore.getState();
     addTodoItem(routine.id, newTodo);
   }
 
   private toggleTodoItem(todoId: string, completed: boolean) {
-    const { routine, updateTodoItem } = useRoutineStore.getState();
+    const routine = this.getRoutineForDate();
     if (!routine) return;
 
+    const { updateTodoItem } = useRoutineStore.getState();
     updateTodoItem(routine.id, todoId, { completed });
   }
 
   private deleteTodoItem(todoId: string) {
-    const { routine, deleteTodoItem } = useRoutineStore.getState();
+    const routine = this.getRoutineForDate();
     if (!routine) return;
 
+    const { deleteTodoItem } = useRoutineStore.getState();
     deleteTodoItem(routine.id, todoId);
   }
 
@@ -627,13 +670,15 @@ export class RoutineDashboard extends Modal {
 
   private renderRoutine() {
     const header = this.container.querySelector('.drpm-header');
-    const dateDisplay = header?.querySelector('.drpm-date-display');
+    const dateDisplay = header?.querySelector('.drpm-date-display') as HTMLElement | null;
 
     if (dateDisplay) {
       this.updateDateDisplay(dateDisplay);
     }
 
-    this.renderTabContent();
+    if (this.tabContent) {
+      this.renderTabContent(this.tabContent);
+    }
   }
 
   onClose() {

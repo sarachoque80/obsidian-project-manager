@@ -1,21 +1,21 @@
-import { Plugin, TFile, TAbstractFile } from 'obsidian';
+import { Plugin, TFile, TAbstractFile, App } from 'obsidian';
 import { Project } from '../types/project';
 import { ContextDocument } from '../types/context-doc';
 import { FileData } from '../types/file';
 import { DailyRoutine } from '../types/routine';
 
 export class DataManager {
-  private plugin: Plugin;
+  private app: App;
   private dataPath: string = 'data/drpm';
 
-  constructor(plugin: Plugin) {
-    this.plugin = plugin;
+  constructor(app: App) {
+    this.app = app;
   }
 
   async ensureDataDirectory(): Promise<void> {
-    const folder = this.plugin.vault.getAbstractFileByPath(this.dataPath);
+    const folder = this.app.vault.getAbstractFileByPath(this.dataPath);
     if (!folder) {
-      await this.plugin.vault.createFolder(this.dataPath);
+      await this.app.vault.createFolder(this.dataPath);
     }
   }
 
@@ -23,10 +23,10 @@ export class DataManager {
     await this.ensureDataDirectory();
     const filePath = `${this.dataPath}/projects/${project.id}.json`;
 
-    const file = this.plugin.vault.getAbstractFileByPath(filePath) as TFile;
+    const file = this.app.vault.getAbstractFileByPath(filePath) as TFile;
 
     if (file) {
-      await this.plugin.vault.modify(file, JSON.stringify(project, null, 2));
+      await this.app.vault.modify(file, JSON.stringify(project, null, 2));
     } else {
       await this.createNestedFile(filePath, JSON.stringify(project, null, 2));
     }
@@ -34,12 +34,12 @@ export class DataManager {
 
   async loadProject(id: string): Promise<Project | null> {
     const filePath = `${this.dataPath}/projects/${id}.json`;
-    const file = this.plugin.vault.getAbstractFileByPath(filePath) as TFile;
+    const file = this.app.vault.getAbstractFileByPath(filePath) as TFile;
 
     if (!file) return null;
 
     try {
-      const content = await this.plugin.vault.read(file);
+      const content = await this.app.vault.read(file);
       return JSON.parse(content);
     } catch (error) {
       console.error('Error loading project:', error);
@@ -49,10 +49,10 @@ export class DataManager {
 
   async deleteProject(id: string): Promise<void> {
     const filePath = `${this.dataPath}/projects/${id}.json`;
-    const file = this.plugin.vault.getAbstractFileByPath(filePath);
+    const file = this.app.vault.getAbstractFileByPath(filePath);
 
     if (file) {
-      await this.plugin.vault.delete(file);
+      await this.app.vault.delete(file);
     }
   }
 
@@ -60,10 +60,10 @@ export class DataManager {
     await this.ensureDataDirectory();
     const filePath = `${this.dataPath}/contexts/${context.id}.json`;
 
-    const file = this.plugin.vault.getAbstractFileByPath(filePath) as TFile;
+    const file = this.app.vault.getAbstractFileByPath(filePath) as TFile;
 
     if (file) {
-      await this.plugin.vault.modify(file, JSON.stringify(context, null, 2));
+      await this.app.vault.modify(file, JSON.stringify(context, null, 2));
     } else {
       await this.createNestedFile(filePath, JSON.stringify(context, null, 2));
     }
@@ -71,12 +71,12 @@ export class DataManager {
 
   async loadContextDocument(id: string): Promise<ContextDocument | null> {
     const filePath = `${this.dataPath}/contexts/${id}.json`;
-    const file = this.plugin.vault.getAbstractFileByPath(filePath) as TFile;
+    const file = this.app.vault.getAbstractFileByPath(filePath) as TFile;
 
     if (!file) return null;
 
     try {
-      const content = await this.plugin.vault.read(file);
+      const content = await this.app.vault.read(file);
       return JSON.parse(content);
     } catch (error) {
       console.error('Error loading context document:', error);
@@ -89,30 +89,30 @@ export class DataManager {
 
     if (fileData.type === 'local' && file) {
       const assetsPath = `${this.dataPath}/assets`;
-      const folder = this.plugin.vault.getAbstractFileByPath(assetsPath);
+      const folder = this.app.vault.getAbstractFileByPath(assetsPath);
       if (!folder) {
-        await this.plugin.vault.createFolder(assetsPath);
+        await this.app.vault.createFolder(assetsPath);
       }
 
       const filePath = `${assetsPath}/${fileData.id}-${file.name}`;
       const arrayBuffer = await file.arrayBuffer();
       const uint8Array = new Uint8Array(arrayBuffer);
 
-      const existingFile = this.plugin.vault.getAbstractFileByPath(filePath) as TFile;
+      const existingFile = this.app.vault.getAbstractFileByPath(filePath) as TFile;
       if (existingFile) {
-        await this.plugin.vault.modifyBinary(existingFile, uint8Array);
+        await this.app.vault.modifyBinary(existingFile, uint8Array.buffer);
       } else {
-        await this.plugin.vault.createBinary(filePath, uint8Array);
+        await this.app.vault.createBinary(filePath, uint8Array.buffer);
       }
 
       fileData.path = filePath;
     }
 
     const metadataPath = `${this.dataPath}/files/${fileData.id}.json`;
-    const metadataFile = this.plugin.vault.getAbstractFileByPath(metadataPath) as TFile;
+    const metadataFile = this.app.vault.getAbstractFileByPath(metadataPath) as TFile;
 
     if (metadataFile) {
-      await this.plugin.vault.modify(metadataFile, JSON.stringify(fileData, null, 2));
+      await this.app.vault.modify(metadataFile, JSON.stringify(fileData, null, 2));
     } else {
       await this.createNestedFile(metadataPath, JSON.stringify(fileData, null, 2));
     }
@@ -122,10 +122,10 @@ export class DataManager {
     await this.ensureDataDirectory();
     const filePath = `${this.dataPath}/routines/${routine.id}.json`;
 
-    const file = this.plugin.vault.getAbstractFileByPath(filePath) as TFile;
+    const file = this.app.vault.getAbstractFileByPath(filePath) as TFile;
 
     if (file) {
-      await this.plugin.vault.modify(file, JSON.stringify(routine, null, 2));
+      await this.app.vault.modify(file, JSON.stringify(routine, null, 2));
     } else {
       await this.createNestedFile(filePath, JSON.stringify(routine, null, 2));
     }
@@ -133,12 +133,12 @@ export class DataManager {
 
   async loadDailyRoutine(id: string): Promise<DailyRoutine | null> {
     const filePath = `${this.dataPath}/routines/${id}.json`;
-    const file = this.plugin.vault.getAbstractFileByPath(filePath) as TFile;
+    const file = this.app.vault.getAbstractFileByPath(filePath) as TFile;
 
     if (!file) return null;
 
     try {
-      const content = await this.plugin.vault.read(file);
+      const content = await this.app.vault.read(file);
       return JSON.parse(content);
     } catch (error) {
       console.error('Error loading daily routine:', error);
@@ -152,13 +152,13 @@ export class DataManager {
 
     for (let i = 0; i < parts.length - 1; i++) {
       currentPath += (i === 0 ? '' : '/') + parts[i];
-      const folder = this.plugin.vault.getAbstractFileByPath(currentPath);
+      const folder = this.app.vault.getAbstractFileByPath(currentPath);
       if (!folder) {
-        await this.plugin.vault.createFolder(currentPath);
+        await this.app.vault.createFolder(currentPath);
       }
     }
 
-    await this.plugin.vault.create(path, content);
+    await this.app.vault.create(path, content);
   }
 
   // Cleanup method called when plugin is unloaded

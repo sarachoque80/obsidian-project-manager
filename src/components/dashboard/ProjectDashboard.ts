@@ -1,5 +1,5 @@
 import { App, Modal, TFile } from 'obsidian';
-import { DirectResponseProjectManagerPlugin } from '../../core/plugin';
+import DirectResponseProjectManagerPlugin from '../../core/plugin';
 import { useProjectsStore } from '../../stores/projects-store';
 
 export class ProjectDashboard extends Modal {
@@ -147,7 +147,7 @@ export class ProjectDashboard extends Modal {
       startDate: new Date(),
       duration: 10,
       stages: [],
-      status: 'active',
+      status: 'active' as const,
       progress: 0
     };
 

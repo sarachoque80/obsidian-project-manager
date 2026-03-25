@@ -1,5 +1,5 @@
-import { SuggestModal, App } from 'obsidian';
-import type DirectResponseProjectManagerPlugin from '../../core/plugin-updated';
+import { SuggestModal, App, Notice } from 'obsidian';
+import DirectResponseProjectManagerPlugin from '../../core/plugin';
 import { Project } from '../../types/project';
 
 interface SuggestionItem {

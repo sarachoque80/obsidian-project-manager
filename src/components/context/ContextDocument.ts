@@ -1,11 +1,13 @@
 import { App, Modal } from 'obsidian';
-import { DirectResponseProjectManagerPlugin } from '../../core/plugin';
-import { useContextStore, ContextDocument } from '../../stores/context-store';
+import DirectResponseProjectManagerPlugin from '../../core/plugin';
+import { useContextStore } from '../../stores/context-store';
+import type { ContextDocument as ContextDocumentType } from '../../types/context-doc';
 
 export class ContextDocument extends Modal {
+  private contentSection: HTMLElement | null = null;
   private plugin: DirectResponseProjectManagerPlugin;
   private container: HTMLElement;
-  private currentSection: string | null = null;
+  private currentSection: string | null = 'avatar';
 
   constructor(app: App, plugin: DirectResponseProjectManagerPlugin) {
     super(app);
@@ -175,7 +177,9 @@ export class ContextDocument extends Modal {
   private updateSection(sectionId: string, updates: any) {
     const { activeContextId } = useContextStore.getState();
     const { updateSection } = useContextStore.getState();
-    updateSection(activeContextId, sectionId, updates);
+    if (activeContextId) {
+      updateSection(activeContextId, sectionId, updates);
+    }
   }
 
   private deleteSection(sectionId: string) {
@@ -183,7 +187,9 @@ export class ContextDocument extends Modal {
 
     const { activeContextId } = useContextStore.getState();
     const { deleteSection } = useContextStore.getState();
-    deleteSection(activeContextId, sectionId);
+    if (activeContextId) {
+      deleteSection(activeContextId, sectionId);
+    }
   }
 
   private saveContext() {

@@ -58,7 +58,7 @@ export function calculateGlobalTaskProgress(tasks: any[]): number {
     missing: 0
   };
 
-  const totalWeight = tasks.reduce((sum, task) => sum + statusWeights[task.status], 0);
+  const totalWeight = tasks.reduce((sum, task) => sum + statusWeights[task.status as TaskStatus], 0);
   return Math.round(totalWeight / tasks.length);
 }
 

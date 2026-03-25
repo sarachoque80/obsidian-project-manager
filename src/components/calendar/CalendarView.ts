@@ -1,5 +1,5 @@
 import { App, Modal } from 'obsidian';
-import { DirectResponseProjectManagerPlugin } from '../../core/plugin';
+import DirectResponseProjectManagerPlugin from '../../core/plugin';
 
 interface CalendarEvent {
   id: string;
@@ -264,7 +264,6 @@ export class CalendarView extends Modal {
 
     section.createEl('h2', { text: 'Eventos del Día' });
 
-    const { activeProjectId } = this.plugin.dataManager?.plugin?.app?.vault || {};
     const selectedDate = this.currentDate;
 
     const dayEvents = this.events.filter(e => {
@@ -362,7 +361,7 @@ export class CalendarView extends Modal {
     const grid = this.container.querySelector('.drpm-calendar-grid');
 
     if (header) {
-      const dateDisplay = header.querySelector('.drpm-date-display');
+      const dateDisplay = header.querySelector('.drpm-date-display') as HTMLElement | null;
       if (dateDisplay) this.updateDateDisplay(dateDisplay);
     }
 
