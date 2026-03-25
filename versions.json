@@ -1,0 +1,19 @@
+{
+  "pluginId": "obsidian-direct-response-pm",
+  "repo": "antigravity/obsidian-direct-response-pm",
+  "versions": [
+    {
+      "version": "1.0.0",
+      "minAppVersion": "1.5.0",
+      "date": "2024-03-25",
+      "downloadUrl": "https://github.com/antigravity/obsidian-direct-response-pm/releases/download/v1.0.0/obsidian-direct-response-pm-1.0.0.zip",
+      "description": "Initial public release with complete feature set including 10-stage process, context documents, file management, calendar integration, daily routine, and liquid glass UI",
+      "breaking": false
+    }
+  ],
+  "latestVersion": "1.0.0",
+  "minAppVersion": "1.5.0",
+  "manifestUrl": "https://github.com/antigravity/obsidian-direct-response-pm/raw/master/manifest.json",
+  "downloadUrl": "https://github.com/antigravity/obsidian-direct-response-pm/releases/latest",
+  "lastUpdated": "2024-03-25T00:00:00Z"
+}

@@ -28,7 +28,7 @@ export class DirectResponseProjectManagerPlugin extends Plugin {
   private routineModal: RoutineDashboard | null = null;
 
   async onload() {
-    console.log('🚀 Loading Direct Response Project Manager Plugin v1.0.0');
+    console.log(`🚀 Loading Direct Response Project Manager Plugin v${this.manifest.version}`);
 
     await this.loadSettings();
     this.dataManager = new DataManager(this);
@@ -200,7 +200,7 @@ class DirectResponseSettingTab extends PluginSettingTab {
     infoSection.createEl('h4', { text: 'ℹ️ Información' });
 
     infoSection.createEl('p', {
-      text: 'Plugin v1.0.0 - Sistema completo de gestión de proyectos para direct response marketing con 10 etapas, documentos de contexto, rutina diaria y calendario.'
+      text: `Plugin v${this.plugin.manifest.version} - Sistema completo de gestión de proyectos para direct response marketing con 10 etapas, documentos de contexto, rutina diaria y calendario.`
     });
 
     containerEl.appendChild(infoSection);

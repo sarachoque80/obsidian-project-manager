@@ -1,0 +1,67 @@
+{
+  "types": [
+    {
+      "type": "feat",
+      "section": "Added",
+      "hidden": false
+    },
+    {
+      "type": "fix",
+      "section": "Fixed",
+      "hidden": false
+    },
+    {
+      "type": "docs",
+      "section": "Documentation",
+      "hidden": false
+    },
+    {
+      "type": "style",
+      "section": "Changed",
+      "hidden": true
+    },
+    {
+      "type": "refactor",
+      "section": "Changed",
+      "hidden": true
+    },
+    {
+      "type": "perf",
+      "section": "Changed",
+      "hidden": false
+    },
+    {
+      "type": "test",
+      "section": "Tests",
+      "hidden": false
+    },
+    {
+      "type": "build",
+      "section": "Build",
+      "hidden": true
+    },
+    {
+      "type": "ci",
+      "section": "Build",
+      "hidden": true
+    },
+    {
+      "type": "chore",
+      "section": "Build",
+      "hidden": true
+    },
+    {
+      "type": "revert",
+      "section": "Reverts",
+      "hidden": false
+    }
+  ],
+  "commitUrlFormat": "https://github.com/antigravity/obsidian-direct-response-pm/commits/{{hash}}",
+  "compareUrlFormat": "https://github.com/antigravity/obsidian-direct-response-pm/compare/{{previousTag}}...{{currentTag}}",
+  "releaseCommitMessageFormat": "chore(release): v{{version}}",
+  "skip": {
+    "tag": false,
+    "commit": false,
+    "bump": false
+  }
+}

@@ -1,26 +1,55 @@
 {
   "name": "obsidian-direct-response-pm",
   "version": "1.0.0",
-  "description": "Complete project management plugin for direct response marketing",
+  "description": "Complete project management plugin for direct response marketing with 10 stages, context documents, daily routine, calendar integration and liquid glass UI",
   "main": "main.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/antigravity/obsidian-direct-response-pm.git"
+  },
+  "bugs": {
+    "url": "https://github.com/antigravity/obsidian-direct-response-pm/issues"
+  },
+  "homepage": "https://github.com/antigravity/obsidian-direct-response-pm#readme",
   "scripts": {
     "dev": "rollup --config rollup.config.js -w",
     "build": "rollup --config rollup.config.js",
-    "check": "tsc --noEmit"
+    "check": "tsc --noEmit",
+    "lint": "tsc --noEmit && eslint src/**/*.ts",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "version": "node scripts/bump-version.js",
+    "release": "npm run build && git add . && git commit -m \"release: v%s\" && git tag v%s && git push && git push --tags"
   },
   "keywords": [
     "obsidian",
     "plugin",
     "project-management",
-    "direct-response"
+    "direct-response",
+    "marketing",
+    "productivity",
+    "calendar",
+    "routine",
+    "task-management",
+    "state-management",
+    "typescript"
   ],
-  "author": "Antigravity",
+  "author": {
+    "name": "Antigravity",
+    "url": "https://github.com/antigravity",
+    "email": "dev@antigravity.com"
+  },
   "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.0",
     "@rollup/plugin-node-resolve": "^15.0.0",
     "@rollup/plugin-typescript": "^11.0.0",
     "@types/node": "^20.0.0",
+    "eslint": "^8.50.0",
+    "prettier": "^3.0.0",
     "obsidian": "^1.5.0",
     "rollup": "^3.20.0",
     "tslib": "^2.5.0",
@@ -28,5 +57,16 @@
   },
   "dependencies": {
     "zustand": "^4.4.0"
+  },
+  "files": [
+    "main.js",
+    "manifest.json",
+    "styles.css",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "obsidian": {
+    "minAppVersion": "1.5.0"
   }
 }
