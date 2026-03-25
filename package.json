@@ -1,6 +1,6 @@
 {
   "name": "obsidian-direct-response-pm",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Complete project management plugin for direct response marketing with 10 stages, context documents, daily routine, calendar integration and liquid glass UI",
   "main": "main.js",
   "repository": {

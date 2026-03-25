@@ -3,6 +3,14 @@
   "repo": "antigravity/obsidian-direct-response-pm",
   "versions": [
     {
+      "version": "1.1.0",
+      "minAppVersion": "1.5.0",
+      "date": "2024-03-25",
+      "downloadUrl": "https://github.com/antigravity/obsidian-direct-response-pm/releases/download/1.1.0/obsidian-direct-response-pm-1.1.0.zip",
+      "description": "Release 1.1.0 - Adds Brief Manager with CRUD system, improved Obsidian guidelines compliance, and release automation",
+      "breaking": false
+    },
+    {
       "version": "1.0.0",
       "minAppVersion": "1.5.0",
       "date": "2024-03-25",
@@ -11,7 +19,7 @@
       "breaking": false
     }
   ],
-  "latestVersion": "1.0.0",
+  "latestVersion": "1.1.0",
   "minAppVersion": "1.5.0",
   "manifestUrl": "https://github.com/antigravity/obsidian-direct-response-pm/raw/master/manifest.json",
   "downloadUrl": "https://github.com/antigravity/obsidian-direct-response-pm/releases/latest",
