@@ -160,4 +160,11 @@ export class DataManager {
 
     await this.plugin.vault.create(path, content);
   }
+
+  // Cleanup method called when plugin is unloaded
+  cleanup(): void {
+    console.log('🧹 DataManager: Cleaning up resources');
+    // Close any open connections, clear caches, etc.
+    // Currently nothing to clean as all operations use Obsidian API
+  }
 }

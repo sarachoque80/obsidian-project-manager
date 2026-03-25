@@ -11,6 +11,7 @@ Esta es la documentación principal del plugin. Para más información, consulta
 - 🔧 [API_REFERENCE.md](API_REFERENCE.md) - Referencia completa de la API
 - 🚀 [DEVELOPMENT.md](DEVELOPMENT.md) - Guía para desarrolladores
 - 📋 [OBSIDIAN_PLUGIN_GUIDELINES.md](OBSIDIAN_PLUGIN_GUIDELINES.md) - Directrices oficiales de Obsidian
+- ✨ [IMPROVEMENTS_OBSIDIAN_GUIDELINES.md](IMPROVEMENTS_OBSIDIAN_GUIDELINES.md) - Mejoras implementadas según directrices
 - 📦 [VERSIONING_SYSTEM.md](VERSIONING_SYSTEM.md) - Sistema de versionado completo
 - 📝 [VERSIONING.md](VERSIONING.md) - Guía detallada de versionado
 

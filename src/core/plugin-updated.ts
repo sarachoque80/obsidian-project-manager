@@ -1,5 +1,6 @@
 import { Plugin, PluginSettingTab, Setting, Notice } from 'obsidian';
 import { ProjectDashboard } from '../components/dashboard/ProjectDashboard';
+import { ProjectSearchModal } from '../components/dashboard/ProjectSearchModal';
 import { ContextDocument } from '../components/context/ContextDocument';
 import { CalendarView } from '../components/calendar/CalendarView';
 import { RoutineDashboard } from '../components/routine/RoutineDashboard';
@@ -27,21 +28,30 @@ export class DirectResponseProjectManagerPlugin extends Plugin {
   private calendarModal: CalendarView | null = null;
   private routineModal: RoutineDashboard | null = null;
 
+  // Status bar item
+  private statusBarItem: HTMLElement | null = null;
+
   async onload() {
     console.log(`🚀 Loading Direct Response Project Manager Plugin v${this.manifest.version}`);
 
     await this.loadSettings();
     this.dataManager = new DataManager(this);
 
+    // Add status bar item
+    this.statusBarItem = this.addStatusBarItem();
+    this.updateStatusBar('Direct Response PM: Activo');
+
     // Add ribbon icon
-    this.addRibbonIcon('rocket', 'Direct Response PM', () => {
+    const ribbonIcon = this.addRibbonIcon('rocket', 'Direct Response PM', () => {
       this.openDashboard();
     });
+    ribbonIcon.addClass('drpm-ribbon-icon');
 
-    // Add commands
+    // Add commands with hotkeys
     this.addCommand({
       id: 'open-dashboard',
       name: 'Open Project Dashboard',
+      hotkeys: [{ modifiers: ['Mod', 'Shift'], key: 'd' }],
       callback: () => {
         this.openDashboard();
       }
@@ -50,6 +60,7 @@ export class DirectResponseProjectManagerPlugin extends Plugin {
     this.addCommand({
       id: 'open-context',
       name: 'Open Context Documents',
+      hotkeys: [{ modifiers: ['Mod', 'Shift'], key: 'c' }],
       callback: () => {
         this.openContext();
       }
@@ -58,6 +69,7 @@ export class DirectResponseProjectManagerPlugin extends Plugin {
     this.addCommand({
       id: 'open-calendar',
       name: 'Open Calendar',
+      hotkeys: [{ modifiers: ['Mod', 'Shift'], key: 'k' }],
       callback: () => {
         this.openCalendar();
       }
@@ -66,8 +78,18 @@ export class DirectResponseProjectManagerPlugin extends Plugin {
     this.addCommand({
       id: 'open-routine',
       name: 'Open Daily Routine',
+      hotkeys: [{ modifiers: ['Mod', 'Shift'], key: 'r' }],
       callback: () => {
         this.openRoutine();
+      }
+    });
+
+    this.addCommand({
+      id: 'search-projects',
+      name: 'Search Projects',
+      hotkeys: [{ modifiers: ['Mod', 'p'] }],
+      callback: () => {
+        this.openProjectSearch();
       }
     });
 
@@ -79,6 +101,41 @@ export class DirectResponseProjectManagerPlugin extends Plugin {
 
   onunload() {
     console.log('👋 Unloading Direct Response Project Manager Plugin');
+
+    // Obsidian limpia automáticamente:
+    //   - Comandos registrados con this.addCommand()
+    //   - Events registrados con this.registerEvent()
+    //   - Vistas registradas con this.registerView()
+
+    // Cerrar modales si están abiertos
+    if (this.dashboardModal) {
+      this.dashboardModal.close();
+      this.dashboardModal = null;
+    }
+
+    if (this.contextModal) {
+      this.contextModal.close();
+      this.contextModal = null;
+    }
+
+    if (this.calendarModal) {
+      this.calendarModal.close();
+      this.calendarModal = null;
+    }
+
+    if (this.routineModal) {
+      this.routineModal.close();
+      this.routineModal = null;
+    }
+
+    // Limpiar DataManager
+    if (this.dataManager) {
+      this.dataManager.cleanup();
+    }
+
+    // Status bar item se limpia automáticamente por Obsidian
+
+    new Notice('👋 Direct Response Project Manager unloaded', 3000);
   }
 
   async loadSettings() {
@@ -139,6 +196,19 @@ export class DirectResponseProjectManagerPlugin extends Plugin {
 
   async deleteProject(id: string) {
     await this.dataManager.deleteProject(id);
+  }
+
+  updateStatusBar(text: string): void {
+    if (this.statusBarItem) {
+      this.statusBarItem.setText(text);
+    }
+  }
+
+  openProjectSearch() {
+    // Get all projects from data manager
+    const projects: any[] = []; // Would come from dataManager
+    const searchModal = new ProjectSearchModal(this.app, this, projects);
+    searchModal.open();
   }
 }
 
