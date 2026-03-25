@@ -85,7 +85,8 @@ const newVersionEntry = {
   version: newVersion,
   minAppVersion: manifestJson.minAppVersion,
   date: new Date().toISOString().split('T')[0],
-  downloadUrl: `https://github.com/antigravity/obsidian-direct-response-pm/releases/download/v${newVersion}/obsidian-direct-response-pm-${newVersion}.zip`,
+  // IMPORTANTE: Para Obsidian, el URL del release NO debe tener prefijo 'v'
+  downloadUrl: `https://github.com/antigravity/obsidian-direct-response-pm/releases/download/${newVersion}/obsidian-direct-response-pm-${newVersion}.zip`,
   description: `Version ${newVersion}`,
   breaking: type === 'major'
 };
@@ -144,7 +145,9 @@ console.log(`\nNext steps:`);
 console.log(`  1. Review and update CHANGELOG.md with actual changes`);
 console.log(`  2. Run: npm run build`);
 console.log(`  3. Test the build in Obsidian`);
-console.log(`  4. Commit: git add . && git commit -m "release: v${newVersion}"`);
-console.log(`  5. Tag: git tag v${newVersion}`);
+console.log(`  4. Commit: git add . && git commit -m "release: ${newVersion}"`);
+console.log(`  5. Tag: git tag ${newVersion}`);
+console.log(`     IMPORTANTE: El tag NO debe tener prefijo 'v' para Obsidian`);
 console.log(`  6. Push: git push && git push --tags`);
-console.log(`  7. Create release on GitHub`);
+console.log(`  7. GitHub Actions creará el release automáticamente`);
+console.log(`     El release incluirá main.js, manifest.json y styles.css como assets individuales`);

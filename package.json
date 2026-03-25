@@ -18,7 +18,7 @@
     "lint": "tsc --noEmit && eslint src/**/*.ts",
     "format": "prettier --write \"src/**/*.ts\"",
     "version": "node scripts/bump-version.js",
-    "release": "npm run build && git add . && git commit -m \"release: v%s\" && git tag v%s && git push && git push --tags"
+    "release": "npm run build && git add . && git commit -m \"release: %s\" && git tag %s && git push && git push --tags"
   },
   "keywords": [
     "obsidian",
