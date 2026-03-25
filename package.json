@@ -1,16 +1,16 @@
 {
-  "name": "obsidian-direct-response-pm",
+  "name": "obsidian-project-manager",
   "version": "1.1.0",
-  "description": "Complete project management plugin for direct response marketing with 10 stages, context documents, daily routine, calendar integration and liquid glass UI",
+  "description": "Complete project management plugin with 10 stages, context documents, daily routine, calendar integration and liquid glass UI",
   "main": "main.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/antigravity/obsidian-direct-response-pm.git"
+    "url": "https://github.com/sarachoque80/obsidian-project-manager.git"
   },
   "bugs": {
-    "url": "https://github.com/antigravity/obsidian-direct-response-pm/issues"
+    "url": "https://github.com/sarachoque80/obsidian-project-manager/issues"
   },
-  "homepage": "https://github.com/antigravity/obsidian-direct-response-pm#readme",
+  "homepage": "https://github.com/sarachoque80/obsidian-project-manager#readme",
   "scripts": {
     "dev": "rollup --config rollup.config.js -w",
     "build": "rollup --config rollup.config.js",
@@ -24,8 +24,6 @@
     "obsidian",
     "plugin",
     "project-management",
-    "direct-response",
-    "marketing",
     "productivity",
     "calendar",
     "routine",
@@ -34,8 +32,8 @@
     "typescript"
   ],
   "author": {
-    "name": "Antigravity",
-    "url": "https://github.com/antigravity",
+    "name": "sarachoque80",
+    "url": "https://github.com/sarachoque80",
     "email": "dev@antigravity.com"
   },
   "license": "MIT",

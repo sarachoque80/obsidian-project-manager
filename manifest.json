@@ -1,10 +1,10 @@
 {
-  "id": "obsidian-direct-response-pm",
-  "name": "Direct Response Project Manager",
+  "id": "obsidian-project-manager",
+  "name": "Obsidian Project Manager",
   "version": "1.1.0",
   "minAppVersion": "1.5.0",
-  "description": "Complete project management plugin for direct response marketing with 10 stages, context documents, daily routine, calendar integration and liquid glass UI",
-  "author": "Antigravity",
-  "authorUrl": "https://github.com/antigravity",
+  "description": "Complete project management plugin with 10 stages, context documents, daily routine, calendar integration and liquid glass UI",
+  "author": "sarachoque80",
+  "authorUrl": "https://github.com/sarachoque80",
   "isDesktopOnly": false
 }
